@@ -3,5 +3,6 @@ from django.contrib import admin
 
 urlpatterns = patterns('',
     url(r'^', include('home.urls')),
+    url(r'^contact/', include('contacts.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )

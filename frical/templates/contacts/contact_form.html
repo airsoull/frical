@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap %}
+{% load staticfiles %}
+{% load sekizai_tags %}
+
+{% block title %}
+	{% trans "Contact" %}
+{% endblock title %}
+
+{% block before_content %}
+<div id="gmap">
+</div>
+{% endblock before_content %}
+
+{% block content %}
+<div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 formal-white">
+	{% if messages %}
+		<div class="alert alert-success">
+			{% for message in messages %}
+	    		{{ message }}
+	    	{% endfor %}
+		</div>
+	{% endif %}
+
+	<ul class="ul-contact">
+		<li class="upper">{% trans "address" %}:&nbsp;&nbsp;<span>{{ current_site.config.address }}</span></li></br>
+		<li class="upper">{% trans "phone" %}:&nbsp;&nbsp;<span>{{ current_site.config.phone }}</li>
+	</ul>
+	
+	</br></br>
+	<form action="{% url 'contact_form_view' %}" method="POST">
+		{% csrf_token %}
+		{{ form|bootstrap }}
+		<button class="btn btn-primary btn-contact">{% trans "Contactar" %}</button>
+	</form>
+	</br></br>
+</div>
+	
+
+	{% addtoblock "js" %}
+		<script src="https://maps.google.com/maps/api/js?sensor=true"></script>
+		<script src="{% static 'js/gmaps.js' %}"></script>
+		<script src="{% static 'js/map.js' %}"></script>
+	{% endaddtoblock %}
+
+{% endblock content %}
