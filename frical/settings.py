@@ -31,6 +31,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
 
     'frical',
     'home',
@@ -38,6 +40,7 @@ INSTALLED_APPS = (
     'django_extensions',
     'storages',
     'compressor',
+    'mailqueue',
 )
 
 MIDDLEWARE_CLASSES = (
