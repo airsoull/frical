@@ -9,6 +9,10 @@ ADMINS = (
     (os.getenv('ADMIN_NAME', 'example'), os.getenv('ADMIN_EMAIL', 'example@example.com')),
 )
 
+MANAGERS = (
+    (os.getenv('CONTACT_NAME', 'Contact'), os.getenv('CONTACT_EMAIL', 'contact@example.com')),
+)
+
 SECRET_KEY = 'im-8t^gkj*xi8qn@@wr9xswmaixyz%#_yj!=ix8=$l#*=eq*ic'
 
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
@@ -28,8 +32,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'frical',
+    'home',
+
     'django_extensions',
     'storages',
+    'compressor',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -66,6 +74,12 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
+
 STATIC_URL = os.getenv('STATIC_URL', '/static/')
 MEDIA_ROOT = os.getenv('MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))
 MEDIA_URL = os.getenv('MEDIA_URL', '/media/')
@@ -79,6 +93,8 @@ EMAIL_PORT = int(os.getenv('EMAIL_PORT', 25))
 EMAIL_SUBJECT_PREFIX = os.getenv('EMAIL_SUBJECT_PREFIX', '')
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'False') == 'True'
 
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'no-reply@example.com')
+
 AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_SECURE_URLS = os.getenv('AWS_S3_SECURE_URLS', 'True') == 'True'
 AWS_QUERYSTRING_AUTH = os.getenv('AWS_QUERYSTRING_AUTH', 'False') == 'True'
@@ -88,3 +104,10 @@ STATICFILES_STORAGE = os.getenv('STATICFILES_STORAGE', 'django.contrib.staticfil
 
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+
+COMPRESS_ENABLED = not DEBUG
+COMPRESS_STORAGE = STATICFILES_STORAGE
+COMPRESS_URL = STATIC_URL
+COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
+COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
+COMPRESS_OFFLINE = os.getenv('COMPRESS_OFFLINE', 'False') == 'True'

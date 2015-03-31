@@ -11,3 +11,4 @@ django-extensions==1.5.2
 django-storages==1.1.8
 boto==2.36.0
 ipython==3.0.0
+django-mail-queue==2.2.0
