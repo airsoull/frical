@@ -16,3 +16,4 @@ django-compressor==1.4
 django-bootstrap-form==3.2
 django-sekizai==0.8.1
 Pillow==2.7.0
+sorl-thumbnail==12.2

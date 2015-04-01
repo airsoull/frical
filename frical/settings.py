@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'mailqueue',
     'bootstrapform',
     'sekizai',
+    'sorl.thumbnail',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -132,3 +133,5 @@ COMPRESS_URL = STATIC_URL
 COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
 COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
 COMPRESS_OFFLINE = os.getenv('COMPRESS_OFFLINE', 'False') == 'True'
+
+IMAGE_SMALL_SIZE = '100'

@@ -1,6 +1,8 @@
+from .conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.core.cache import cache
+
+from sorl.thumbnail import get_thumbnail
 
 from .managers import JobManager, ImageManager
 
@@ -22,21 +24,12 @@ class Job(models.Model):
         self.name = self.name.strip().lower()
         self.description = self.description.strip()
 
-    @property
     def image(self):
-        key = self.get_image_cache_key()
-        image = cache.get(key)
-        if not image:
-            image = self.images.all()[0] if self.images.count() else None
-            cache.set(key, image)
-        return image
-
-    def get_image_cache_key(self):
-        return 'job.%d.image' % self.id
+        return self.images.visible().order_by('order').first()
 
 
 class Image(models.Model):
-    job = models.ForeignKey(Job, related_name='jobs')
+    job = models.ForeignKey(Job, related_name='images')
     image = models.ImageField(_('Image'), max_length=255, upload_to='upload/jobs/images/%Y/%m/%d/', width_field='width', height_field='height')
     order = models.PositiveIntegerField(_('Order'), default=0)
     width = models.PositiveIntegerField(_('Width'), default=0, blank=True)
@@ -49,5 +42,31 @@ class Image(models.Model):
     def __unicode__(self):
         return u"%s (%s)" % (self.image, self.job.name)
 
-    def get_absolute_url(self):
+    @property
+    def small_url(self):
+        im = get_thumbnail(self.image, settings.IMAGE_SMALL_SIZE, crop="center")
+        return im.url
+
+    @property
+    def arrow_url(self):
+        im = get_thumbnail(self.image, settings.IMAGE_ARROW, crop="center")
+        return im.url
+
+    @property
+    def medium_url(self):
+        im = get_thumbnail(self.image, settings.IMAGE_MEDIUM_SIZE)
+        return im.url
+
+    @property
+    def large_url(self):
+        im = get_thumbnail(self.image, settings.IMAGE_LARGE_SIZE)
+        return im.url
+
+    @property
+    def extra_large_url(self):
+        im = get_thumbnail(self.image, settings.IMAGE_EXTRA_LARGE_SIZE)
+        return im.url
+
+    @property
+    def original_url(self):
         return self.image.url

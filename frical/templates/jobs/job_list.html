@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center formal-white">
+	<div class="list-group">
+		{% for job in job_list %}
+			<a href="#">{{ job.name }} <img src="{{ job.image.small_url }}" alt="{{ job.name }}"></a>
+		{% endfor %}
+	</div>
+</div>
+{% endblock content %}

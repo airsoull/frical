@@ -4,7 +4,7 @@ class JobManager(models.Manager):
 	use_for_related_fields = True
 
 	def visible(self):
-		return self.get_query_set().filter(active=True)
+		return self.get_queryset().filter(active=True)
 	visible.queryset_method = True
 
 
@@ -12,5 +12,5 @@ class ImageManager(models.Manager):
 	use_for_related_fields = True
 
 	def visible(self):
-		return self.get_query_set().filter(active=True)
+		return self.get_queryset().filter(active=True)
 	visible.queryset_method = True

@@ -30,7 +30,7 @@ class ContactViewTest(TestCase):
         self.assertRedirects(response, self.url)
 
         contact = Contact.objects.get()
-        self.assertEqual(params['name'], contact.name)
+        self.assertEqual(params['name'].title(), contact.name)
         self.assertEqual(params['email'], contact.email)
         self.assertEqual(params['body'], contact.body)
 
