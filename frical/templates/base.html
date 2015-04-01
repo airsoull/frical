@@ -1,0 +1,64 @@
+{% load sekizai_tags %}{% load compress %}{% load staticfiles %}{% load i18n %}<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="{{ current_site.config.description }}">
+	<meta name='language' content='ES'>
+	<meta name="author" content="Cristian Sepulveda, cris.andrs@gmail.com">
+	<meta name='robots' content='index, follow'>
+	<meta name="twitter:creator" content="@airsoull">
+	
+	<title>{% block title %}{{ current_site.name }}{% endblock title %}</title>
+
+	<link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+	{% compress css %}
+	<link rel="stylesheet" href="{% static 'css/magister.css' %}">
+	{% endcompress %}
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
+	{% render_block "css" %}
+</head>
+
+<body class="theme-invert">
+	
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+    	<div class="navbar-header">
+        	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            	<span class="sr-only">Toggle navigation</span>
+            	<span class="icon-bar"></span>
+            	<span class="icon-bar"></span>
+            	<span class="icon-bar"></span>
+          	</button>
+          	<a class="navbar-brand" href="{% url 'home' %}">{{ current_site.name }}</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+         	<ul class="nav navbar-nav">
+         		{% comment %}
+         			<li><a href="#about">{% trans "clientes" %}</a></li>
+         		{% endcomment %}
+         		<li><a href="{% url 'jobs_list_view' %}">{% trans "trabajos" %}</a></li>
+            	<li><a href="{% url 'contact_form_view' %}">{% trans "contacto" %}</a></li>
+          	</ul>
+        </div>
+  	</div>
+</nav>
+
+<div class="container">
+	{% block before_content %}{% endblock before_content %}
+	<div class="row">
+	</br></br>
+		{% block content %}{% endblock content %}
+	</div>
+</div>
+
+<script src="{% static 'js/jquery-2.1.3.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/modernizr.custom.72241.js' %}"></script>
+<script src="{% static 'js/magister.js' %}"></script>
+{% render_block "js" %}
+</body>
+</html>

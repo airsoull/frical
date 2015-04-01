@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
+	<h1 class="title">
+		{% if current_site.config.logo_active %}
+			<img src="{{ current_site.config.logo_original_url }}" alt="{{ current_site.name }}">
+		{% else %}
+			{{ current_site.name }}
+		{% endif %}
+	</h1>
+	<h2 class="subtitle">{{ current_site.config.description }}</h2>	
+</div>
+{% endblock content %}

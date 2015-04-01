@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap %}
+{% load staticfiles %}
+{% load sekizai_tags %}
+
+{% block title %}
+	{% trans "Contact" %}
+{% endblock title %}
+
+{% block before_content %}
+<div id="gmap">
+	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3326.196521760487!2d-70.65065040000003!3d-33.5222758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662daf20fb93f43%3A0x9c5a1d6040e23c7a!2sIquique+6885%2C+La+Cisterna%2C+Regi%C3%B3n+Metropolitana%2C+Chile!5e0!3m2!1ses!2s!4v1427853536022" width="100%" height="300" frameborder="0" style="border:0"></iframe>
+</div>
+{% endblock before_content %}
+
+{% block content %}
+<div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 formal-white">
+	{% if messages %}
+		<div class="alert alert-success">
+			{% for message in messages %}
+	    		{{ message }}
+	    	{% endfor %}
+		</div>
+	{% endif %}
+
+	<ul class="ul-contact">
+		<li class="upper">{% trans "address" %}:&nbsp;&nbsp;<span>{{ current_site.config.address }}</span></li></br>
+		<li class="upper">{% trans "phone" %}:&nbsp;&nbsp;<span>{{ current_site.config.phone }}</li>
+	</ul>
+	
+	</br></br>
+	<form action="{% url 'contact_form_view' %}" method="POST">
+		{% csrf_token %}
+		{{ form|bootstrap }}
+		<button class="btn btn-primary btn-contact">{% trans "Contactar" %}</button>
+	</form>
+	</br></br>
+</div>
+
+{% endblock content %}

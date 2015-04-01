@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load sekizai_tags %}
+{% load staticfiles %}
+{% load compress %}
+
+{% block content %}
+
+<div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
+	<div class="col-xs-5">
+		<h1 class="subtitle">{{ object.name }}</h1>
+		<span class="formal-white">{{ object.description|linebreaks }}</span>
+	</div>
+	<div class="col-xs-5">
+		<img src="{{ object.image.medium_url }}" class="img-responsive" alt="{{ object.name }}">
+	</div>
+</br>
+	<div class="col-md-10">
+		<ul class="bxslider">
+			{% for image in object.images.visible|dictsort:"order" %}
+				<li><img src="{{ image.medium_url }}" /></li>
+			{% endfor %}
+		</ul>
+		<div id="bx-pager">
+			{% for image in object.images.visible|dictsort:"order" %}
+				<a data-slide-index="{{ forloop.counter0 }}" href=""><img src="{{ image.small_url }}" /></a>
+			{% endfor %}
+		</div>
+	</div>
+
+</div>
+	{% addtoblock "css" %}
+		{% compress css %}
+			<link rel="stylesheet" href="{% static 'css/jquery.bxslider.css' %}">
+		{% endcompress %}
+	{% endaddtoblock %}
+	
+	{% addtoblock "js" %}
+		<script src="{% static 'js/jquery.bxslider.min.js' %}"></script>
+
+		<script>
+			$(document).on('ready', even);
+			function even(){
+				$('.bxslider').bxSlider({
+				  pagerCustom: '#bx-pager'
+				});
+			}
+		</script>
+	{% endaddtoblock %}
+
+
+{% endblock content %}
