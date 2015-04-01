@@ -10,6 +10,8 @@
 	<div class="list-group">
 		{% for job in job_list|dictsort:"order" %}
 			<a href="{{ job.get_absolute_url }}">{{ job.name }} <img src="{{ job.image.small_url }}" alt="{{ job.name }}"></a> <br>
+		{% empty %}
+			NO HAY TRABAJOS ACTIVOS
 		{% endfor %}
 	</div>
 </div>
