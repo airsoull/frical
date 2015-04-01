@@ -37,7 +37,9 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
          	<ul class="nav navbar-nav">
-         		<li><a href="#about">{% trans "clientes" %}</a></li>
+         		{% comment %}
+         			<li><a href="#about">{% trans "clientes" %}</a></li>
+         		{% endcomment %}
          		<li><a href="{% url 'jobs_list_view' %}">{% trans "trabajos" %}</a></li>
             	<li><a href="{% url 'contact_form_view' %}">{% trans "contacto" %}</a></li>
           	</ul>

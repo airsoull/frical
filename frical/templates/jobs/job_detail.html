@@ -13,13 +13,13 @@
 	<div class="col-xs-5">
 		<img src="{{ object.image.medium_url }}" class="img-responsive" alt="{{ object.name }}">
 	</div>
+</br>
 	<div class="col-md-10">
 		<ul class="bxslider">
 			{% for image in object.images.visible|dictsort:"order" %}
 				<li><img src="{{ image.medium_url }}" /></li>
 			{% endfor %}
 		</ul>
-
 		<div id="bx-pager">
 			{% for image in object.images.visible|dictsort:"order" %}
 				<a data-slide-index="{{ forloop.counter0 }}" href=""><img src="{{ image.small_url }}" /></a>
