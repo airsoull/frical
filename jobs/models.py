@@ -1,10 +1,12 @@
-from .conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.core.urlresolvers import reverse
+from django.template.defaultfilters import slugify
 
 from sorl.thumbnail import get_thumbnail
 
 from .managers import JobManager, ImageManager
+from .conf import settings
 
 
 class Job(models.Model):
@@ -21,11 +23,14 @@ class Job(models.Model):
         return '%s' % (self.name)
 
     def clean(self):
-        self.name = self.name.strip().lower()
+        self.name = self.name.strip().title()
         self.description = self.description.strip()
 
     def image(self):
         return self.images.visible().order_by('order').first()
+
+    def get_absolute_url(self):
+        return reverse('jobs.views.job_detail_view', kwargs={'slug': slugify(self.name), 'pk': self.pk})
 
 
 class Image(models.Model):

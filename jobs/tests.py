@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
+from django.template.defaultfilters import slugify
 
 from .models import Job
 
@@ -19,3 +20,25 @@ class JobsListView(TestCase):
 
 		self.assertIn(job1, response.context['job_list'])
 		self.assertNotIn(job2, response.context['job_list'])
+
+
+class JobDetailView(TestCase):
+
+	def setUp(self):
+		self.job = Job.objects.create(name='foo', description='bar', active=True)
+		self.url = reverse('jobs.views.job_detail_view', kwargs={'slug': slugify(self.job.name), 'pk': self.job.pk})
+
+	def test_get(self):
+		response = self.client.get(self.url)
+		self.assertEqual(response.status_code, 200)
+
+		self.assertTemplateUsed('jobs/job_detail.html')
+		self.assertEqual(self.job, response.context['object'])
+
+	def test_no_active(self):
+		self.job.active = False
+		self.job.save()
+
+		response = self.client.get(self.url)
+		self.assertEqual(response.status_code, 404)
+		self.assertTemplateUsed('404.html')
