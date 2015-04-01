@@ -135,3 +135,4 @@ COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
 COMPRESS_OFFLINE = os.getenv('COMPRESS_OFFLINE', 'False') == 'True'
 
 IMAGE_SMALL_SIZE = '100'
+IMAGE_MEDIUM_SIZE = '500'
