@@ -5,5 +5,5 @@ db.sqlite3
 *.DS_Store
 media/*
 static/*
-secrets.json
 static/CACHE/css/7fa00bd8d604.css
+secrets.json
