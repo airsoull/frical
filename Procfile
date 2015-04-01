@@ -1,1 +1,0 @@
-web: gunicorn frical.wsgi --log-file -

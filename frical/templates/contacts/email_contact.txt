@@ -1,7 +1,0 @@
-nombre: {{ contact.name }}
-
-Usuario: {{ contact.email }}
-
-Duda:
-
-{{ contact.body }}
