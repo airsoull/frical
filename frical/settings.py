@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'home',
     'contacts',
     'configs',
+    'jobs',
 
     'django_extensions',
     'storages',
