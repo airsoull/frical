@@ -5,7 +5,7 @@ from django.contrib.sites.models import Site
 
 class Config(models.Model):
     site = models.OneToOneField(Site, related_name='config')
-    logo = models.ImageField(_('Logo'), upload_to='upload/config/logo/%Y/%m/%d/', width_field='width', height_field='height', null=True)
+    logo = models.ImageField(_('Logo'), upload_to='upload/config/logo/%Y/%m/%d/', width_field='width', height_field='height', null=True, blank=True)
     logo_active = models.BooleanField(_('Logo Active'), default=True)
     description = models.CharField(_('Description'), max_length=150)
     address = models.CharField(_('Address'), max_length=50)
