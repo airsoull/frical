@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 import os
 
 import dj_database_url
@@ -13,7 +14,10 @@ MANAGERS = (
     (os.getenv('CONTACT_NAME', 'Contact'), os.getenv('CONTACT_EMAIL', 'contact@example.com')),
 )
 
-SECRET_KEY = 'im-8t^gkj*xi8qn@@wr9xswmaixyz%#_yj!=ix8=$l#*=eq*ic'
+with open(os.path.join(BASE_DIR, 'secrets.json')) as handle:
+    SECRETS = json.load(handle)
+
+SECRET_KEY = SECRETS['secret_key']
 
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 TEMPLATE_DEBUG = os.getenv('TEMPLATE_DEBUG', str(DEBUG)) == 'True'
