@@ -17,7 +17,7 @@ MANAGERS = (
 with open(os.path.join(BASE_DIR, 'secrets.json')) as handle:
     SECRETS = json.load(handle)
 
-SECRET_KEY = SECRETS['secret_key']
+SECRET_KEY = 'im-8t^gkj*xi8qn@@wr9xswmaixyz%#_yj!=ix8=$l#*=eq*ic'
 
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 TEMPLATE_DEBUG = os.getenv('TEMPLATE_DEBUG', str(DEBUG)) == 'True'
