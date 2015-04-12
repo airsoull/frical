@@ -9,7 +9,7 @@
 <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center formal-white">
 	<div class="list-group">
 		{% for job in job_list|dictsort:"order" %}
-			<a href="{{ job.get_absolute_url }}">{{ job.name }} <img src="{{ job.image.small_url }}" alt="{{ job.name }}"></a> <br>
+			<a href="{{ job.get_absolute_url }}">{{ job.name }} <img src="{{ job.image.small_url }}" alt="{{ job.name }}"></a> <br> <br>
 		{% empty %}
 			NO HAY TRABAJOS ACTIVOS
 		{% endfor %}
